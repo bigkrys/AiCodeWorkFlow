@@ -1,0 +1,12 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "AI · 项目理解", "type": "shell", "command": "npm run ai:ctx:build && npm run ai:understand" },
+    { "label": "AI · 技术方案", "type": "shell", "command": "npm run ai:solution", "dependsOn": ["AI · 项目理解"] },
+    { "label": "AI · 代码实现", "type": "shell", "command": "npm run ai:impl", "dependsOn": ["AI · 技术方案"] },
+    { "label": "AI · 生成单测", "type": "shell", "command": "npm run ai:test", "dependsOn": ["AI · 代码实现"] },
+    { "label": "AI · 流程深挖", "type": "shell", "command": "npm run ai:flow" },
+    { "label": "AI · 深度研究（需要时）", "type": "shell", "command": "npm run ai:research" },
+    { "label": "AI · 全链路", "dependsOrder": "sequence", "dependsOn": ["AI · 项目理解", "AI · 技术方案", "AI · 代码实现", "AI · 生成单测"] }
+  ]
+}

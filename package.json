@@ -1,0 +1,42 @@
+{
+  "name": "ai-workflow-ts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ai:ctx:build": "node scripts/ai/inject-context.js build",
+    "ai:understand": "node scripts/ai/codex-run.js phase=understand .prompts/01_project_understanding.md docs/",
+    "ai:solution": "node scripts/ai/codex-run.js phase=solution .prompts/02_solution_design.md docs/",
+    "ai:impl": "node scripts/ai/codex-run.js phase=impl .prompts/03_code_impl.md -",
+    "ai:test": "node scripts/ai/codex-run.js phase=test .prompts/04_unit_test.md -",
+    "ai:flow": "node scripts/ai/codex-run.js phase=flow .prompts/05_flow_analysis.md docs/",
+    "ai:all-docs": "npm run ai:ctx:build && npm run ai:understand && npm run ai:solution && npm run ai:flow",
+
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run --coverage",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier -w ."
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pino": "^9.4.0",
+    "pino-http": "^9.0.0",
+    "zod": "^3.23.8",
+    "axios": "^1.7.7",
+    "axios-retry": "^4.5.0",
+    "lru-cache": "^11.0.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.7.0",
+    "eslint": "^9.10.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "prettier": "^3.3.3",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.3",
+    "supertest": "^7.0.0"
+  }
+}

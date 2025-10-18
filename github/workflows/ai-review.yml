@@ -1,0 +1,27 @@
+name: AI Review (read-only)
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions: { pull-requests: write, contents: read }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
+      - name: AI Read-Only Review
+        env:
+          MODEL: codex
+        run: |
+          node scripts/ai/codex-run.js phase=review .prompts/02_solution_design.md - > review.txt
+          echo "=== AI REVIEW START ==="; cat review.txt; echo "=== AI REVIEW END ==="
+          if grep -q "\[BLOCKER\]" review.txt; then
+            echo "Found [BLOCKER]. Failing."; exit 1; fi
+      - name: Label 'ai-reviewed'
+        if: ${{ success() }}
+        run: gh pr edit "$PR" --add-label "ai-reviewed"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
