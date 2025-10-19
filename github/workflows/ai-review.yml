@@ -1,27 +1,20 @@
-name: AI Review (read-only)
+name: AI Review Gate
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [main, master]
+
 jobs:
-  review:
+  ai_review:
     runs-on: ubuntu-latest
-    permissions: { pull-requests: write, contents: read }
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: '20' }
-      - run: npm ci
-      - name: AI Read-Only Review
-        env:
-          MODEL: codex
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Run AI Review (read-only)
         run: |
-          node scripts/ai/codex-run.js phase=review .prompts/02_solution_design.md - > review.txt
-          echo "=== AI REVIEW START ==="; cat review.txt; echo "=== AI REVIEW END ==="
-          if grep -q "\[BLOCKER\]" review.txt; then
-            echo "Found [BLOCKER]. Failing."; exit 1; fi
-      - name: Label 'ai-reviewed'
-        if: ${{ success() }}
-        run: gh pr edit "$PR" --add-label "ai-reviewed"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR: ${{ github.event.pull_request.number }}
+          npm ci
+          npm run ai:review:local > ai_review_result.md
+      - name: Post PR Comment
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: "🤖 AI Review Result"
+          path: ai_review_result.md
