@@ -2,18 +2,18 @@
   "scripts": {
     "ai:ctx:build": "node scripts/ai/inject-context.js",
 
-    "ai:understand": "node scripts/ai/env.js export && node scripts/ai/render-template.js .prompts/01_project_understanding.md .tmp/01.md && node scripts/ai/codex-run.js --prompt .tmp/01.md --rules rules --out \"$(node scripts/ai/env.js join spec/SPEC.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join spec/SPEC.md)\" SPEC",
+    "ai:understand": "node scripts/ai/env.js export && node scripts/ai/render-template.js prompts/01_project_understanding.md .tmp/01.md && node scripts/ai/codex-run.js --prompt .tmp/01.md --rules rules --out \"$(node scripts/ai/env.js join spec/SPEC.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join spec/SPEC.md)\" SPEC",
 
-    "ai:solution": "node scripts/ai/render-template.js .prompts/02_solution_design.md .tmp/02.md && node scripts/ai/codex-run.js --prompt .tmp/02.md --rules rules --in \"$(node scripts/ai/env.js join spec/SPEC.md)\" --out \"$(node scripts/ai/env.js join spec/PLAN.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join spec/PLAN.md)\" PLAN",
+    "ai:solution": "node scripts/ai/render-template.js prompts/02_solution_design.md .tmp/02.md && node scripts/ai/codex-run.js --prompt .tmp/02.md --rules rules --in \"$(node scripts/ai/env.js join spec/SPEC.md)\" --out \"$(node scripts/ai/env.js join spec/PLAN.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join spec/PLAN.md)\" PLAN",
 
-    "ai:impl": "node scripts/ai/render-template.js .prompts/03_code_impl.md .tmp/03.md && node scripts/ai/codex-run.js --prompt .tmp/03.md --rules rules --in \"$(node scripts/ai/env.js join spec/PLAN.md)\" --out \"$(node scripts/ai/env.js join impl/CHANGELOG.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join impl/CHANGELOG.md)\" IMPL",
+    "ai:impl": "node scripts/ai/render-template.js prompts/03_code_impl.md .tmp/03.md && node scripts/ai/codex-run.js --prompt .tmp/03.md --rules rules --in \"$(node scripts/ai/env.js join spec/PLAN.md)\" --out \"$(node scripts/ai/env.js join impl/CHANGELOG.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join impl/CHANGELOG.md)\" IMPL",
 
-    "ai:test": "node scripts/ai/render-template.js .prompts/04_unit_test.md .tmp/04.md && node scripts/ai/codex-run.js --prompt .tmp/04.md --rules rules --out \"$(node scripts/ai/env.js join tests/TESTS.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join tests/TESTS.md)\" TESTS",
+    "ai:test": "node scripts/ai/render-template.js prompts/04_unit_test.md .tmp/04.md && node scripts/ai/codex-run.js --prompt .tmp/04.md --rules rules --out \"$(node scripts/ai/env.js join tests/TESTS.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join tests/TESTS.md)\" TESTS",
 
-    "ai:flow": "node scripts/ai/render-template.js .prompts/05_flow_analysis.md .tmp/05.md && node scripts/ai/codex-run.js --prompt .tmp/05.md --rules rules --out \"$(node scripts/ai/env.js join docs/FLOW.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join docs/FLOW.md)\" FLOW",
+    "ai:flow": "node scripts/ai/render-template.js prompts/05_flow_analysis.md .tmp/05.md && node scripts/ai/codex-run.js --prompt .tmp/05.md --rules rules --out \"$(node scripts/ai/env.js join docs/FLOW.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join docs/FLOW.md)\" FLOW",
 
-    "ai:research": "node scripts/ai/render-template.js .prompts/99_research.md .tmp/99.md && node scripts/ai/codex-run.js --prompt .tmp/99.md --rules rules --out \"$(node scripts/ai/env.js join docs/RESEARCH.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join docs/RESEARCH.md)\" RESEARCH",
+    "ai:research": "node scripts/ai/render-template.js prompts/99_research.md .tmp/99.md && node scripts/ai/codex-run.js --prompt .tmp/99.md --rules rules --out \"$(node scripts/ai/env.js join docs/RESEARCH.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join docs/RESEARCH.md)\" RESEARCH",
 
-    "ai:review:local": "node scripts/ai/render-template.js .prompts/98_review_only.md .tmp/98.md && node scripts/ai/review-local.js --prompt .tmp/98.md --in \"$(node scripts/ai/env.js get RUN_ROOT)\" --out \"$(node scripts/ai/env.js join review/REVIEW.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join review/REVIEW.md)\" REVIEW"
+    "ai:review:local": "node scripts/ai/render-template.js prompts/98_review_only.md .tmp/98.md && node scripts/ai/review-local.js --prompt .tmp/98.md --in \"$(node scripts/ai/env.js get RUN_ROOT)\" --out \"$(node scripts/ai/env.js join review/REVIEW.md)\" && node scripts/ai/update-run-index.js \"$(node scripts/ai/env.js join review/REVIEW.md)\" REVIEW"
   }
 }

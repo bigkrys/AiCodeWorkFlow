@@ -19,13 +19,13 @@
 ```mermaid
 flowchart TD
   A[输入 featureSlug] --> B[AI · 生成运行ID<br/>RUN_ID / FEATURE_SLUG / RUN_ROOT]
-  B --> C[AI · 项目理解<br/>.prompts/01_* → spec/SPEC.md]
-  C --> D[AI · 技术方案（概要+详细）<br/>.prompts/02_* → spec/PLAN.md]
-  D --> E[AI · 代码实现<br/>.prompts/03_* → impl/CHANGELOG.md + 实码]
-  E --> F[AI · 生成单测<br/>.prompts/04_* → tests/TESTS.md + *.test.ts]
-  F --> G[AI · 流程深挖/联调计划<br/>.prompts/05_* → docs/FLOW.md]
-  G --> H[AI · 本地审查（只审不写）<br/>.prompts/98_* → review/REVIEW.md]
-  C -. 可选 .-> R[AI · 深度研究（需要时）<br/>.prompts/99_* → docs/RESEARCH.md]
+  B --> C[AI · 项目理解<br/>prompts/01_* → spec/SPEC.md]
+  C --> D[AI · 技术方案（概要+详细）<br/>prompts/02_* → spec/PLAN.md]
+  D --> E[AI · 代码实现<br/>prompts/03_* → impl/CHANGELOG.md + 实码]
+  E --> F[AI · 生成单测<br/>prompts/04_* → tests/TESTS.md + *.test.ts]
+  F --> G[AI · 流程深挖/联调计划<br/>prompts/05_* → docs/FLOW.md]
+  G --> H[AI · 本地审查（只审不写）<br/>prompts/98_* → review/REVIEW.md]
+  C -. 可选 .-> R[AI · 深度研究（需要时）<br/>prompts/99_* → docs/RESEARCH.md]
   H --> Z[index.json 汇总 & 版本滚动 -vN]
 ```
 
@@ -38,7 +38,7 @@ flowchart TD
 ```
 AiCodeWorkFlow/
 ├─ .vscode/tasks.json                # VS Code 一键全链路任务
-├─ .prompts/                         # 各阶段 Prompt 模板（含输出契约）
+├─ prompts/                         # 各阶段 Prompt 模板（含输出契约）
 │   ├─ 01_project_understanding.md   # 需求理解/上下文归纳 → SPEC.md
 │   ├─ 02_solution_design.md         # 概要+详细方案 → PLAN.md
 │   ├─ 03_code_impl.md               # 代码落地指导 → CHANGELOG.md + 实码
