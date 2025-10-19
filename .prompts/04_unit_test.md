@@ -9,7 +9,7 @@
 - 测试命名与现有风格一致
 
 # 输入
-- `spec/SPEC.md`、`spec/PLAN.md`、（可选）`spec/TASKS.md`
+- `docs/<feature>/SPEC.md`、`docs/<feature>/PLAN.md`、（可选）`docs/<feature>/TASKS.md`
 - 改动过的源码文件（脚本已注入）
 
 # 规范

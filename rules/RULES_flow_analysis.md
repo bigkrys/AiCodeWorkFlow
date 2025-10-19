@@ -1,7 +1,7 @@
 # 代码流程分析规则
 
 ## 输出目标
-- 文件：`docs/<feature>-flow.md`
+- 文件：`docs/<feature>/flow.md`
 - 格式：Markdown + Mermaid + 文本树
 
 ## 内容要求

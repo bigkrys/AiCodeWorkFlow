@@ -4,7 +4,7 @@
 - 把 PLAN 拆解为可执行的最小单元任务（约 1~3 小时/项）
 
 ## 内容格式
-输出 `spec/TASKS.md`，每项结构如下：
+输出 `docs/<feature>/TASKS.md`，每项结构如下：
 ``
 Task #编号
 
@@ -28,4 +28,4 @@ Task #编号
 - 不生成伪任务（无产出或重复任务）。
 
 ## 输出控制
-- 文件：`spec/TASKS.md`
+- 文件：`docs/<feature>/TASKS.md`

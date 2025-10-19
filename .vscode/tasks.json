@@ -1,34 +1,56 @@
 {
   "version": "2.0.0",
-  "tasks": [
-    { "label": "AI · 构建上下文", "type": "shell", "command": "npm run ai:ctx:build" },
-    { "label": "AI · 项目理解", "type": "shell", "command": "npm run ai:understand", "dependsOn": ["AI · 构建上下文"] },
-    { "label": "AI · 技术方案", "type": "shell", "command": "npm run ai:solution", "dependsOn": ["AI · 项目理解"] },
-    { "label": "AI · 代码实现", "type": "shell", "command": "npm run ai:impl", "dependsOn": ["AI · 技术方案"] },
-    { "label": "AI · 生成单测", "type": "shell", "command": "npm run ai:test", "dependsOn": ["AI · 代码实现"] },
-    { "label": "AI · 流程深挖", "type": "shell", "command": "npm run ai:flow" },
-    { "label": "AI · 深度研究（需要时）", "type": "shell", "command": "npm run ai:research" },
-    { "label": "AI · 本地审查(只审不写)", "type": "shell", "command": "npm run ai:review:local" },
+  "inputs": [
     {
-      "label": "AI · 全链路（规范优先）",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "AI · 构建上下文",
-        "AI · 项目理解",
-        "AI · 技术方案",
-        "AI · 代码实现",
-        "AI · 生成单测"
-      ]
+      "id": "featureSlug",
+      "type": "promptString",
+      "description": "本次需求的别名（英文短词，如 order-refund-v2 ）",
+      "default": "feature-x"
+    }
+  ],
+  "tasks": [
+    { "label": "AI · 生成运行ID", "type": "shell", "command": "node scripts/runid.js > .ai-runid" },
+
+    {
+      "label": "AI · 项目理解",
+      "type": "shell",
+      "command": "npm run ai:ctx:build && npm run ai:understand",
+      "options": { "env": { "FEATURE_SLUG": "${input:featureSlug}" } },
+      "dependsOn": ["AI · 生成运行ID"]
     },
     {
-      "label": "AI · 全链路（快跑版）",
+      "label": "AI · 技术方案",
+      "type": "shell",
+      "command": "npm run ai:solution",
+      "dependsOn": ["AI · 项目理解"],
+      "options": { "env": { "FEATURE_SLUG": "${input:featureSlug}" } }
+    },
+    {
+      "label": "AI · 代码实现",
+      "type": "shell",
+      "command": "npm run ai:impl",
+      "dependsOn": ["AI · 技术方案"],
+      "options": { "env": { "FEATURE_SLUG": "${input:featureSlug}" } }
+    },
+    {
+      "label": "AI · 生成单测",
+      "type": "shell",
+      "command": "npm run ai:test",
+      "dependsOn": ["AI · 代码实现"],
+      "options": { "env": { "FEATURE_SLUG": "${input:featureSlug}" } }
+    },
+
+    { "label": "AI · 流程深挖", "type": "shell", "command": "npm run ai:flow", "options": { "env": { "FEATURE_SLUG": "${input:featureSlug}" } } },
+    { "label": "AI · 深度研究（需要时）", "type": "shell", "command": "npm run ai:research", "options": { "env": { "FEATURE_SLUG": "${input:featureSlug}" } } },
+
+    {
+      "label": "AI · 全链路",
       "dependsOrder": "sequence",
-      "dependsOn": [
-        "AI · 构建上下文",
-        "AI · 项目理解",
-        "AI · 技术方案",
-        "AI · 代码实现"
-      ]
-    }
+      "dependsOn": ["AI · 项目理解", "AI · 技术方案", "AI · 代码实现", "AI · 生成单测"]
+    },
+
+    { "label": "Build", "type": "shell", "command": "npm run build", "group": "build" },
+    { "label": "Test (watch)", "type": "shell", "command": "npm run test:watch" },
+    { "label": "AI · 本地审查(只审不写)", "type": "shell", "command": "npm run ai:review:local", "options": { "env": { "FEATURE_SLUG": "${input:featureSlug}" } } }
   ]
 }

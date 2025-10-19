@@ -3,11 +3,11 @@
 
 # 目标（只产文档，不改代码）
 产出/更新：
-- `spec/PLAN.md`（架构与实现路线）
-- 可选：`docs/方案设计.md`（若 `--deep` 参数开启）
+- `docs/<feature>/PLAN.md`（架构与实现路线）
+- 可选：`docs/<feature>/方案设计.md`（若 `--deep` 参数开启）
 
 # 输入
-- `spec/SPEC.md`（上一步产物）
+- `docs/<feature>/SPEC.md`（上一步产物）
 - 代码/文档上下文（脚本已注入）
 
 # PLAN 内容结构（必须遵守）
@@ -27,7 +27,7 @@
 - 所有图/表都在 markdown 内原位生成
 
 # 输出
-- `spec/PLAN.md`（若存在则增量修订）
+- `docs/<feature>/PLAN.md`（若存在则增量修订）
 - 可选 `docs/方案设计.md`（深度版）
 
 # 自检

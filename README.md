@@ -1,6 +1,6 @@
 # 在VScode中搭建 Copilot × Codex 智能协作工作流（可根据自己的agent调整）
 > 一个基于 **GPT-5 Codex + GitHub Copilot** 的全自动 AI 编程工作流模板。  
-> **Codex 负责生产，Copilot 负责审查。
+> Codex 负责生产，Copilot 负责审查。
 
 ## 🧭 一、核心理念
 
@@ -96,3 +96,11 @@ AiCodeWorkFlow/
 | 流程分析 | Codex             | 生成流程文档       | 源码 + 05 + rules/flow_analysis            | `docs/*-flow.md`   |
 | 深度研究 | Claude/Perplexity | 技术对比/选型      | 上下文 + 99 + rules/solution_spec           | `docs/research.md` |
 | 审查   | Copilot           | 只审不写         | 所有产物 + rules/review_spec                 | PR 评论              |
+
+## 五、使用心诀
+
+- **启动前**：先写清需求，Codex 不猜。
+- **生成时**：多用编号化问题，少用模糊词。
+- **实现时**：锁定 scope，单步推进。
+- **审阅时**：用 `[BLOCKER]/[RISK]/[NICE]` 打标签。
+- **维护时**：让 CI 做“坏消息传递者”。
