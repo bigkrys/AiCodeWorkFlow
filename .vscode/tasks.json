@@ -9,7 +9,7 @@
     }
   ],
   "tasks": [
-    { "label": "AI · 生成运行ID", "type": "shell", "command": "node scripts/runid.js > .ai-runid" },
+    { "label": "AI · 生成运行ID", "type": "shell", "command": "node scripts/ai/runid.js > .ai-runid" },
 
     {
       "label": "AI · 项目理解",

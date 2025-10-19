@@ -2,7 +2,7 @@
 
 ## 目标
 1. 将 SPEC 中的“WHAT”变为可实现的“HOW”。
-2. 输出 `docs/<feature>/PLAN.md`，用于指导开发任务与架构决策。
+2. 输出 `{{RUN_ROOT}}/spec/PLAN.md`，用于指导开发任务与架构决策。
 
 ## 内容规范
 - 方案必须包含模块图、接口分层、数据流。
@@ -18,5 +18,5 @@
 - 每节结尾添加 “✅ 输出产物：<文件路径>”
 
 ## 输出控制
-- 文件：`docs/<feature>/PLAN.mdd`（主）
-- 若参数 `--deep` 存在，额外生成 `docs/<feature>/方案设计.md`
+- 文件：`{{RUN_ROOT}}/spec/PLAN.md`
+- 可选深度版：`{{RUN_ROOT}}/docs/方案设计.md`
